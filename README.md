@@ -89,3 +89,7 @@ The original HTML requests **Great Vibes** from Google Fonts. That external font
 Exported from published version 5, source commit `feb5f5b79ceb10788743323a8227a993f67d2f17`. The original source files were verified unchanged. The added npm install/build commands, HTTP serving, asset availability and ZIP integrity were checked. Browser visual/interaction testing was not repeated for this export; the frontend behavior is retained from the original source.
 
 Credentials, Git history and machine-specific caches are intentionally excluded. The live site has not been changed.
+
+## Tests and deployment
+
+Run `npm test` before committing. Branching, environments (dev -> production) and CI/CD are described in [CONTRIBUTING.md](CONTRIBUTING.md).

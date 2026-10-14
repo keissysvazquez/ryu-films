@@ -2,6 +2,7 @@
   "name": "ryu-films",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "Portable source export of RYU Films version 5",
   "engines": {
     "node": ">=20"
@@ -11,9 +12,12 @@
     "start": "node scripts/serve.mjs dist",
     "build": "node scripts/build.mjs",
     "preview": "wrangler dev",
-    "deploy": "wrangler deploy"
+    "test": "node --test",
+    "deploy:dev": "wrangler deploy --env dev",
+    "deploy:prod": "wrangler deploy"
   },
   "devDependencies": {
+    "jsdom": "^30.1.2",
     "wrangler": "^4.151.0"
   },
   "dependencies": {
