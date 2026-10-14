@@ -1,7 +1,7 @@
 // Replace each empty video path with the actual trailer MP4. Stills remain until then.
 // fullVideo is optional: the gallery opens it instead of the short trailer when supplied.
 window.RYU_CONFIG = {
- bookingEmail: '',
+ bookingEmail: 'raulduplessi@yahoo.com',
  bookingUrl: '',
  projects: [
   {title:'No Favors',artist:'SVCIA',poster:'assets/IMG_2669.jpeg',video:'',fullVideo:'',side:'left'},
