@@ -81,9 +81,9 @@ test("submitting posts to /api/inquiry and shows success", async () => {
   assert.match(w.document.querySelector(".form-status").textContent, /sent/i);
 });
 
-test("failed send falls back to a mailto link", async () => {
+test("failed send shows an error and does not open an email app", async () => {
   const w = load({ fetchImpl: async () => ({ ok: false, status: 502 }) });
   fill(w).dispatchEvent(new w.Event("submit", { cancelable: true }));
   await tick();
-  assert.match(w.document.querySelector(".form-status").textContent, /email app/i);
+  assert.match(w.document.querySelector(".form-status").textContent, /could not be sent/i);
 });
