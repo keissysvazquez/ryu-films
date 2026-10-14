@@ -9,9 +9,8 @@ export default {
       msg.setSender({ name: "RYU Films Website", addr: from });
       msg.setRecipient(to);
       msg.setSubject(subject);
-      msg.setHeader("Reply-To", replyTo);
       msg.addMessage({ contentType: "text/plain", data: text });
-      await env.EMAIL.send(new EmailMessage(from, to, msg.asRaw()));
+      await env.EMAIL.send(new EmailMessage(from, to, `Reply-To: <${replyTo}>\r\n${msg.asRaw()}`));
     });
   },
 };
