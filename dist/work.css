@@ -73,14 +73,7 @@
   padding: 24px 6% 90px;
   text-align: center;
 }
-.showcase .eyebrow { margin: 0 0 14px; padding-left: 0.38em; }
-.hero-title {
-  margin: 0 0 40px;
-  font: 400 clamp(28px, 4.2vw, 52px)/1.15 var(--serif);
-  letter-spacing: 0.01em;
-  color: var(--cream);
-  text-shadow: 0 2px 30px rgba(201, 162, 74, 0.2);
-}
+.showcase .eyebrow { margin: 0 0 28px; padding-left: 0.38em; }
 .showcase .featured-art { width: min(440px, 78%); aspect-ratio: 2 / 3; flex: none; }
 
 /* Grid: first card is the featured 16:9 video */

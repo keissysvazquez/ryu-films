@@ -34,14 +34,17 @@ const $$ = (w, s) => [...w.document.querySelectorAll(s)];
 
 test("video list matches the requested Instagram links in order, with real covers", () => {
   const w = load();
-  const codes = ["C6msNW1Ol1A", "CYDXCoorQAi", "CXOVGRmvPZn", "CTXWu_Jn6Gn", "COgpL9Cj-B-", "CNamRogD2bU", "CLAnbxzjLvC", "CCUB4MHjQye", "B0LULHkjzhZ"];
+  const codes = ["C6msNW1Ol1A", "CYDXCoorQAi", "CXOVGRmvPZn", "CTXWu_Jn6Gn", "COgpL9Cj-B-", "CNamRogD2bU", "CLAnbxzjLvC", "CCUB4MHjQye", "B0LULHkjzhZ", "BXDWWq3Arag"];
   const v = w.RYU_VIDEOS;
-  assert.equal(v.length, 9);
+  assert.equal(v.length, 10);
   v.forEach((e, i) => {
     assert.ok(e.title && e.category && e.artist);
     assert.ok(e.instagramUrl.includes(codes[i]), `link ${i + 1}`);
     assert.doesNotMatch(JSON.stringify(e), /PLACEHOLDER/);
     assert.ok(existsSync(new URL(e.coverImage, dist)), `missing ${e.coverImage}`);
+    assert.doesNotMatch(e.coverImage, /^https?:/);
+    const head = readFileSync(new URL(e.coverImage, dist)).subarray(0, 3);
+    assert.ok(head.equals(Buffer.from([0xff, 0xd8, 0xff])) || head[0] === 0x89, `not an image: ${e.coverImage}`);
   });
 });
 test("index.html has Work nav link, section after gallery, and a lightbox with .close", () => {

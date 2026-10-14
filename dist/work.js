@@ -12,7 +12,7 @@
   var nextBtn = dialog.querySelector('.reel-next');
 
   var videos = (window.RYU_VIDEOS || []).filter(function (v) { return v && v.title; });
-  var CATEGORY_ORDER = ['Music Videos', 'Brand Films', 'Aerial'];
+  var CATEGORY_ORDER = ['Music Videos', 'Brand Films', 'Behind the Scenes', 'Aerial'];
   var LOAD_TIMEOUT_MS = 15000;
   var reduceMotion = function () {
     return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;

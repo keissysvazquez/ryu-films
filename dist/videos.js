@@ -5,7 +5,7 @@
 // Fields
 //   title        (required) Shown under the card and in the player.
 //   artist       Artist or client name, shown in small gold capitals above the title.
-//   category     (required) "Music Videos", "Brand Films" or "Aerial". Filter tabs are built from
+//   category     (required) "Music Videos", "Brand Films", "Behind the Scenes" or "Aerial". Filter tabs are built from
 //                the categories used here; a category with no videos gets no tab.
 //   instagramUrl Instagram post, reel or IGTV URL.
 //   coverImage   (optional) Path to a still. Cropped to fill a 16:9 frame. Leave '' for an
@@ -16,9 +16,9 @@
 //                direct MP4/WebM URL. instagramUrl is still used for "View on Instagram".
 window.RYU_VIDEOS = [
   {
-    title: 'Time to Get Back to Work',
+    title: 'Behind the Scenes',
     artist: 'RYU Films',
-    category: 'Brand Films',
+    category: 'Behind the Scenes',
     instagramUrl: 'https://www.instagram.com/reel/C6msNW1Ol1A/',
     coverImage: 'assets/ig-C6msNW1Ol1A.jpg',
     coverPosition: '50% 78%',
@@ -49,7 +49,7 @@ window.RYU_VIDEOS = [
     year: ''
   },
   {
-    title: 'Untitled Music Video',
+    title: 'Fuck Is You Talkin',
     artist: 'Kay-Dot Almighty',
     category: 'Music Videos',
     instagramUrl: 'https://www.instagram.com/p/COgpL9Cj-B-/',
@@ -89,6 +89,14 @@ window.RYU_VIDEOS = [
     instagramUrl: 'https://www.instagram.com/p/B0LULHkjzhZ/',
     coverImage: 'assets/IMG_2669.jpeg',
     coverPosition: '50% 40%',
+    year: ''
+  },
+  {
+    title: 'Class Is In Session',
+    artist: 'West Philly CBL',
+    category: 'Music Videos',
+    instagramUrl: 'https://www.instagram.com/p/BXDWWq3Arag/',
+    coverImage: 'assets/ig-BXDWWq3Arag.jpg',
     year: ''
   }
 ];

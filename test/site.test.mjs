@@ -35,6 +35,7 @@ test("hero has no video thumbnails and gallery shows only the three posters", ()
   assert.equal(d.querySelectorAll("#gallery .poster img").length, 3);
   assert.ok(d.querySelector("#home .featured-art img"));
   assert.ok(d.querySelector("#home .eyebrow"));
+  assert.ok(d.querySelector("#home h1.sr-only"));
 });
 
 test("page order is Hero, Selected Work, Gallery, Let's Create; nav is Work then Gallery", () => {
