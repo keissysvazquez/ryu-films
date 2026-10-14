@@ -78,7 +78,12 @@ test("submitting posts to /api/inquiry and shows success", async () => {
   await tick();
   assert.equal(call.url, "/api/inquiry");
   assert.equal(JSON.parse(call.opts.body).email, "ann@example.com");
-  assert.match(w.document.querySelector(".form-status").textContent, /sent/i);
+  assert.ok(!w.document.querySelector("#booking-dialog").hasAttribute("open"));
+  const ok = w.document.querySelector("#success-dialog");
+  assert.ok(ok.hasAttribute("open"));
+  assert.match(ok.textContent, /inquiry was sent/i);
+  w.document.querySelector("#success-ok").click();
+  assert.ok(!ok.hasAttribute("open"));
 });
 
 test("failed send shows an error and does not open an email app", async () => {
