@@ -1,0 +1,59 @@
+name: Deploy
+
+# Runs on every merge to main: test -> dev -> smoke test -> production (manual approval).
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    uses: ./.github/workflows/ci.yml
+
+  deploy-dev:
+    needs: test
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Deploy to dev
+        run: npm run deploy:dev
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Smoke test dev
+        env:
+          DEV_URL: ${{ vars.DEV_URL }}
+        run: bash scripts/smoke-test.sh "$DEV_URL"
+
+  deploy-production:
+    needs: deploy-dev
+    runs-on: ubuntu-latest
+    # Configure required reviewers on the "production" environment so a person
+    # validates dev before this job runs.
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Deploy to production
+        run: npm run deploy:prod
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Smoke test production
+        run: bash scripts/smoke-test.sh "https://ryufilms.com"

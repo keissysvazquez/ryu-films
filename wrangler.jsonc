@@ -1,16 +1,19 @@
-﻿{
+{
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "ryu-films",
   "main": "src/index.js",
   "compatibility_date": "2026-10-12",
-  "observability": {
-    "enabled": true
-  },
-  "assets": {
-    "directory": "dist",
-    "run_worker_first": ["/api/*"]
-  },
-  "send_email": [
-    { "name": "EMAIL", "destination_address": "raulduplessi@yahoo.com" }
-  ]
+  "observability": { "enabled": true },
+  "assets": { "directory": "dist", "run_worker_first": ["/api/*"] },
+  "vars": { "FROM_EMAIL": "inquiries@ryufilms.com", "TO_EMAIL": "raulduplessi@yahoo.com" },
+  "send_email": [{ "name": "EMAIL", "destination_address": "raulduplessi@yahoo.com" }],
+  "env": {
+    "dev": {
+      "name": "ryu-films-dev",
+      "observability": { "enabled": true },
+      "assets": { "directory": "dist", "run_worker_first": ["/api/*"] },
+      "vars": { "FROM_EMAIL": "inquiries@ryufilms.com", "TO_EMAIL": "raulduplessi@yahoo.com" },
+      "send_email": [{ "name": "EMAIL", "destination_address": "raulduplessi@yahoo.com" }]
+    }
+  }
 }
