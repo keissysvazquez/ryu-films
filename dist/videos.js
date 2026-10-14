@@ -1,60 +1,94 @@
-// SELECTED WORK: edit this list to add, remove or reorder videos. No layout code needs to change.
+// SELECTED WORK: the single source for every video on the site. Edit this list to add,
+// remove or reorder videos; no layout code needs to change. The first video (after
+// filtering) is shown as the large featured card.
 //
 // Fields
-//   title       (required) Shown on the card and under the video.
-//   category    (required) "Music Videos", "Brand Films" or "Aerial". Filter tabs are built from
-//               the categories used here; a category with no videos gets no tab.
-//   instagramUrl           Instagram post or reel URL, e.g. https://www.instagram.com/reel/AbC123xyz/
-//   coverImage  (optional) Path to a still, e.g. 'assets/my-cover.jpg'. Cropped to fill a 4:5 frame.
-//                          Leave '' to show an elegant placeholder card instead.
-//   year        (optional) e.g. '2025'. Leave '' to hide it.
-//   featured    (optional) true makes the card span two columns on desktop.
-//   videoUrl    (optional) Overrides instagramUrl as the playable source. Supports a Vimeo page URL
-//                          (https://vimeo.com/123456789) or a direct MP4/WebM file URL. The
-//                          instagramUrl is still used for the "View on Instagram" link.
-//
-// Every entry below is a PLACEHOLDER: replace the title and paste the real Instagram link.
+//   title        (required) Shown under the card and in the player.
+//   artist       Artist or client name, shown in small gold capitals above the title.
+//   category     (required) "Music Videos", "Brand Films" or "Aerial". Filter tabs are built from
+//                the categories used here; a category with no videos gets no tab.
+//   instagramUrl Instagram post, reel or IGTV URL.
+//   coverImage   (optional) Path to a still. Cropped to fill a 16:9 frame. Leave '' for an
+//                elegant placeholder card.
+//   coverPosition (optional) CSS object-position for the crop, e.g. '50% 20%'.
+//   year         (optional) e.g. '2025'.
+//   videoUrl     (optional) Overrides instagramUrl as the playable source: a Vimeo page URL or a
+//                direct MP4/WebM URL. instagramUrl is still used for "View on Instagram".
 window.RYU_VIDEOS = [
   {
-    title: 'PLACEHOLDER Title 1',
-    category: 'Music Videos',
-    instagramUrl: 'PLACEHOLDER: paste Instagram URL',
-    coverImage: 'assets/IMG_2669.jpeg', // sample cover: replace with your own
-    year: '2025'
-  },
-  {
-    title: 'PLACEHOLDER Title 2',
-    category: 'Music Videos',
-    instagramUrl: 'PLACEHOLDER: paste Instagram URL',
-    coverImage: '',
+    title: 'Time to Get Back to Work',
+    artist: 'RYU Films',
+    category: 'Brand Films',
+    instagramUrl: 'https://www.instagram.com/reel/C6msNW1Ol1A/',
+    coverImage: 'assets/ig-C6msNW1Ol1A.jpg',
+    coverPosition: '50% 78%',
     year: ''
   },
   {
-    title: 'PLACEHOLDER Title 3',
-    category: 'Brand Films',
-    instagramUrl: 'PLACEHOLDER: paste Instagram URL',
-    coverImage: '',
-    year: '2025'
-  },
-  {
-    title: 'PLACEHOLDER Title 4',
-    category: 'Brand Films',
-    instagramUrl: 'PLACEHOLDER: paste Instagram URL',
-    coverImage: '',
+    title: 'I Swear',
+    artist: 'Cipherella',
+    category: 'Music Videos',
+    instagramUrl: 'https://www.instagram.com/tv/CYDXCoorQAi/',
+    coverImage: 'assets/ig-CYDXCoorQAi.jpg',
     year: ''
   },
   {
-    title: 'PLACEHOLDER Title 5',
-    category: 'Aerial',
-    instagramUrl: 'PLACEHOLDER: paste Instagram URL',
-    coverImage: 'assets/IMG_2662.jpeg', // sample cover: replace with your own
-    year: '2024'
+    title: 'For Me',
+    artist: 'Pyrotraxx',
+    category: 'Music Videos',
+    instagramUrl: 'https://www.instagram.com/tv/CXOVGRmvPZn/',
+    coverImage: 'assets/ig-CXOVGRmvPZn.jpg',
+    year: ''
   },
   {
-    title: 'PLACEHOLDER Title 6',
+    title: 'I’m From New York',
+    artist: 'A1 Righteous',
+    category: 'Music Videos',
+    instagramUrl: 'https://www.instagram.com/p/CTXWu_Jn6Gn/',
+    coverImage: 'assets/IMG_2675.jpeg',
+    year: ''
+  },
+  {
+    title: 'Untitled Music Video',
+    artist: 'Kay-Dot Almighty',
+    category: 'Music Videos',
+    instagramUrl: 'https://www.instagram.com/p/COgpL9Cj-B-/',
+    coverImage: 'assets/ig-COgpL9Cj-B-.jpg',
+    coverPosition: '50% 60%',
+    year: ''
+  },
+  {
+    title: 'Bronx Dreamin’',
+    artist: 'Finesse Parlay',
+    category: 'Music Videos',
+    instagramUrl: 'https://www.instagram.com/p/CNamRogD2bU/',
+    coverImage: 'assets/ig-CNamRogD2bU.jpg',
+    coverPosition: '50% 35%',
+    year: ''
+  },
+  {
+    title: 'Solo',
+    artist: 'True Da Homie',
+    category: 'Music Videos',
+    instagramUrl: 'https://www.instagram.com/p/CLAnbxzjLvC/',
+    coverImage: 'assets/ig-CLAnbxzjLvC.jpg',
+    year: ''
+  },
+  {
+    title: 'Aerial Reel',
+    artist: 'RYU Films',
     category: 'Aerial',
-    instagramUrl: 'PLACEHOLDER: paste Instagram URL',
-    coverImage: '',
+    instagramUrl: 'https://www.instagram.com/p/CCUB4MHjQye/',
+    coverImage: 'assets/IMG_2663.jpeg',
+    year: ''
+  },
+  {
+    title: 'No Favors',
+    artist: 'SVCIA',
+    category: 'Music Videos',
+    instagramUrl: 'https://www.instagram.com/p/B0LULHkjzhZ/',
+    coverImage: 'assets/IMG_2669.jpeg',
+    coverPosition: '50% 40%',
     year: ''
   }
 ];

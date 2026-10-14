@@ -22,35 +22,27 @@ function load({ fetchImpl, config } = {}) {
 }
 const tick = () => new Promise((r) => setTimeout(r, 20));
 
-test("config has 8 projects with existing poster files", () => {
-  const w = load();
-  const { projects } = w.RYU_CONFIG;
-  assert.equal(projects.length, 8);
-  for (const p of projects) {
-    assert.ok(p.title && p.artist, "title and artist");
-    assert.ok(existsSync(new URL(p.poster, dist)), `missing ${p.poster}`);
-  }
-});
-
 test("every local asset referenced in index.html exists", () => {
   const refs = [...read("index.html").matchAll(/(?:src|href)="((?:assets\/|style\.css)[^"]*)"/g)].map((m) => m[1]);
   assert.ok(refs.length > 0);
   for (const r of refs) assert.ok(existsSync(new URL(r, dist)), `missing ${r}`);
 });
 
-test("renders a trailer tile and a gallery card per project", () => {
+test("hero has no video thumbnails and gallery shows only the three posters", () => {
   const w = load();
-  assert.equal(w.document.querySelectorAll(".trailer").length, 8);
-  assert.equal(w.document.querySelectorAll(".project").length, 8);
+  const d = w.document;
+  assert.equal(d.querySelectorAll(".trailer, .trailer-grid, .project, #projects").length, 0);
+  assert.equal(d.querySelectorAll("#gallery .poster img").length, 3);
+  assert.ok(d.querySelector("#home .featured-art img"));
+  assert.ok(d.querySelector("#home .eyebrow"));
 });
 
-test("clicking a project opens the preview dialog", () => {
-  const w = load();
-  w.document.querySelector(".project").click();
-  assert.ok(w.document.querySelector("#work-dialog").hasAttribute("open"));
-  assert.equal(w.document.querySelector("#work-title").textContent, w.RYU_CONFIG.projects[0].title);
+test("page order is Hero, Selected Work, Gallery, Let's Create; nav is Work then Gallery", () => {
+  const d = load().document;
+  const ids = [...d.querySelectorAll("main > section")].map((s) => s.id || s.className);
+  assert.deepEqual(ids, ["home", "work", "gallery", "booking"]);
+  assert.deepEqual([...d.querySelectorAll(".nav-links a")].map((a) => a.getAttribute("href")), ["#work", "#gallery"]);
 });
-
 test("Book Me buttons open the booking dialog", () => {
   const w = load();
   w.document.querySelector(".nav-book").click();
