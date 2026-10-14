@@ -33,7 +33,7 @@ export async function handleRequest(request, env, sendEmail) {
       text: `Name: ${name}\nEmail: ${email}\nProject: ${type}\n\n${details}`,
     });
   } catch (err) {
-    console.error("send failed", err);
+    console.error("send failed:", err?.name, err?.message, err?.stack);
     return new Response("Send failed", { status: 502 });
   }
   return new Response("OK");
