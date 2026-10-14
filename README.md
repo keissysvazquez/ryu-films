@@ -96,5 +96,5 @@ Run `npm test` before committing. Branching, environments (dev -> production) an
 
 ## Adding videos to Selected Work
 
-Edit `dist/videos.js` only. Each entry takes `title`, `category` (Music Videos, Brand Films or Aerial), `instagramUrl`, and optional `coverImage`, `year`, `featured: true` and `videoUrl`. Set `videoUrl` to a Vimeo link or an MP4/WebM URL to play it instead of the Instagram embed. Filter tabs with no videos are hidden automatically. Entries titled PLACEHOLDER are samples to replace.
+Edit `dist/videos.js` only. Each entry takes `title`, `category` (Music Videos, Brand Films or Aerial), `instagramUrl`, and optional `coverImage`, `year`, `featured: true` and `videoUrl`. Set `videoUrl` to a Vimeo link or an MP4/WebM URL to play it instead of the Instagram embed. Filter tabs with no videos are hidden automatically.
 

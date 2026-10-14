@@ -12,7 +12,7 @@
   var nextBtn = dialog.querySelector('.reel-next');
 
   var videos = (window.RYU_VIDEOS || []).filter(function (v) { return v && v.title; });
-  var CATEGORY_ORDER = ['Music Videos', 'Brand Films', 'Aerial'];
+  var CATEGORY_ORDER = ['Music Videos', 'Brand Films', 'Behind the Scenes', 'Aerial'];
   var LOAD_TIMEOUT_MS = 15000;
   var reduceMotion = function () {
     return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -58,7 +58,7 @@
   }
 
   function metaText(v) {
-    return [v.category, v.year].filter(Boolean).join(' · ');
+    return [v.artist, v.category, v.year].filter(Boolean).join(' · ');
   }
 
   var PLAY_SVG =
@@ -67,49 +67,47 @@
     '<path d="M19.5 15.5v17l14-8.5z" fill="currentColor"/></svg>';
 
   function buildCard(v, i) {
-    var card = el('button', 'reel-card' + (v.featured ? ' is-featured' : ''));
+    var card = el('button', 'reel-card' + (i === 0 ? ' is-featured' : ''));
     card.type = 'button';
     card.dataset.index = String(i);
-    card.setAttribute('aria-label', 'Play ' + v.title + (v.category ? ', ' + v.category : ''));
+    card.setAttribute('aria-label', 'Play ' + v.title + (v.artist ? ' by ' + v.artist : ''));
 
-    var frame = el('span', 'reel-frame');
     var media = el('span', 'reel-media');
     var cover = String(v.coverImage || '').trim();
 
     function showPlaceholder() {
       media.replaceChildren();
       card.classList.add('no-cover');
-      media.append(el('span', 'reel-ph', v.title));
+      media.append(el('span', 'reel-ph', v.title), playIcon());
     }
 
     if (cover) {
       var img = document.createElement('img');
       img.src = cover;
-      img.alt = v.title + (v.category ? ' (' + v.category + ')' : '');
-      img.loading = 'lazy';
+      img.alt = '';
+      if (v.coverPosition) img.style.objectPosition = v.coverPosition;
+      img.loading = i === 0 ? 'eager' : 'lazy';
       img.decoding = 'async';
       img.addEventListener('error', showPlaceholder);
-      media.append(img);
+      media.append(img, playIcon());
     } else {
       showPlaceholder();
     }
 
-    var overlay = el('span', 'reel-overlay');
-    var play = el('span', 'reel-play');
-    play.innerHTML = PLAY_SVG;
-    var meta = el('span', 'reel-info');
-    var cat = metaText(v);
-    if (cat) meta.append(el('span', 'reel-cat', cat));
-    meta.append(el('span', 'reel-card-title', v.title));
-    overlay.append(play, meta);
+    var caption = el('span', 'reel-info');
+    if (v.artist) caption.append(el('span', 'reel-cat', v.artist));
+    caption.append(el('span', 'reel-card-title', v.title));
 
-    media.append(overlay);
-    frame.append(media);
-    card.append(frame);
+    card.append(media, caption);
     card.addEventListener('click', function () { openLightbox(i, card); });
     return card;
   }
 
+  function playIcon() {
+    var play = el('span', 'reel-play');
+    play.innerHTML = PLAY_SVG;
+    return play;
+  }
   function visible() {
     return current === 'All' ? videos : videos.filter(function (v) { return v.category === current; });
   }

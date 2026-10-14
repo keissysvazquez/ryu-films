@@ -32,21 +32,25 @@ const sample = [
 const $ = (w, s) => w.document.querySelector(s);
 const $$ = (w, s) => [...w.document.querySelectorAll(s)];
 
-test("placeholder data file has 6 valid entries", () => {
+test("video list matches the requested Instagram links in order, with real covers", () => {
   const w = load();
+  const codes = ["C6msNW1Ol1A", "CYDXCoorQAi", "CXOVGRmvPZn", "CTXWu_Jn6Gn", "COgpL9Cj-B-", "CNamRogD2bU", "CLAnbxzjLvC", "CCUB4MHjQye", "B0LULHkjzhZ", "BXDWWq3Arag"];
   const v = w.RYU_VIDEOS;
-  assert.equal(v.length, 6);
-  for (const e of v) {
-    assert.ok(e.title && e.category && "instagramUrl" in e);
-    assert.match(e.title, /PLACEHOLDER/);
-    if (e.coverImage) assert.ok(existsSync(new URL(e.coverImage, dist)), `missing ${e.coverImage}`);
-  }
+  assert.equal(v.length, 10);
+  v.forEach((e, i) => {
+    assert.ok(e.title && e.category && e.artist);
+    assert.ok(e.instagramUrl.includes(codes[i]), `link ${i + 1}`);
+    assert.doesNotMatch(JSON.stringify(e), /PLACEHOLDER/);
+    assert.ok(existsSync(new URL(e.coverImage, dist)), `missing ${e.coverImage}`);
+    assert.doesNotMatch(e.coverImage, /^https?:/);
+    const head = readFileSync(new URL(e.coverImage, dist)).subarray(0, 3);
+    assert.ok(head.equals(Buffer.from([0xff, 0xd8, 0xff])) || head[0] === 0x89, `not an image: ${e.coverImage}`);
+  });
 });
-
 test("index.html has Work nav link, section after gallery, and a lightbox with .close", () => {
   const w = load();
   assert.ok($(w, 'nav a[href="#work"]'));
-  assert.equal($(w, "#gallery").nextElementSibling.id, "work");
+  assert.equal($(w, "#work").nextElementSibling.id, "gallery");
   assert.ok($(w, "#reel-dialog .close"));
 });
 
@@ -154,4 +158,18 @@ test("empty data hides the section and nav link", () => {
   const w = load({ videos: [] });
   assert.ok($(w, "#work").hidden);
   assert.ok($(w, 'a[href="#work"]').hidden);
+});
+
+test("first video of the current filter is the featured card, with artist then title below", () => {
+  const w = load({ videos: sample });
+  assert.ok($$(w, ".reel-card")[0].classList.contains("is-featured"));
+  assert.equal($$(w, ".reel-card.is-featured").length, 1);
+  $$(w, ".reel-tab").find((b) => b.textContent === "Aerial").click();
+  const cards = $$(w, ".reel-card");
+  assert.equal(cards[0].querySelector(".reel-card-title").textContent, "B");
+  assert.ok(cards[0].classList.contains("is-featured"));
+  const withArtist = load({ videos: [{ title: "T", artist: "Art", category: "Aerial", instagramUrl: IG }] });
+  const info = $(withArtist, ".reel-info");
+  assert.deepEqual([...info.children].map((c) => c.textContent), ["Art", "T"]);
+  assert.equal($$(withArtist, ".reel-card .reel-play").length, 1);
 });

@@ -107,30 +107,10 @@ nav button.nav-book:hover {
   pointer-events: none;
   background: radial-gradient(ellipse at 50% 60%, rgba(139, 26, 31, 0.5), transparent 70%);
 }
-.trailer-media {
-  background: var(--surface);
-  outline: 1px solid var(--gold-dim);
-  outline-offset: 3px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
-  transition: outline-color 0.5s var(--ease), box-shadow 0.5s var(--ease);
-}
-.trailer:hover .trailer-media {
-  outline-color: var(--gold);
-  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.6), 0 0 26px rgba(201, 162, 74, 0.25);
-}
-.trailer-name {
-  font: 400 12px/1.4 var(--sans);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.trailer:hover .trailer-name { color: var(--gold-light); text-decoration: none; }
-#motion { background: var(--surface); color: var(--cream); border: 1px solid var(--gold-dim); font-family: var(--sans); }
-
 /* Section dividers: gold hairline with a small deco ornament */
-.gallery, .brand-artwork { position: relative; }
+.gallery { position: relative; }
 .gallery { border-top: 0; }
-.gallery::before, .brand-artwork::before {
+.gallery::before {
   content: '';
   position: absolute;
   top: 0;
@@ -140,7 +120,7 @@ nav button.nav-book:hover {
   background: linear-gradient(90deg, transparent, var(--gold) 20%, var(--gold) 80%, transparent);
   opacity: 0.6;
 }
-.gallery::after, .brand-artwork::after, .booking::after, footer::before {
+.gallery::after, .booking::after, footer::before {
   content: '◆' / '';
   position: absolute;
   top: 0;
@@ -154,7 +134,6 @@ nav button.nav-book:hover {
   background: var(--bg);
 }
 .booking::after { z-index: 2; }
-.brand-artwork { padding-top: 70px; }
 
 /* Typography */
 .eyebrow {
@@ -171,63 +150,6 @@ h2, dialog h2, .booking h2, .section-head h2 {
 }
 .section-head > p { color: var(--muted); font-size: 15px; letter-spacing: 0.04em; }
 .gallery h2 { text-shadow: 0 2px 30px rgba(201, 162, 74, 0.18); }
-
-/* Gallery: framed posters with a picture light */
-.project { position: relative; padding-top: 18px; color: var(--cream); transition: transform 0.6s var(--ease); }
-.project::before {
-  content: '';
-  position: absolute;
-  top: 4px;
-  left: 50%;
-  width: 36%;
-  height: 5px;
-  transform: translateX(-50%);
-  border-radius: 3px;
-  background: linear-gradient(180deg, var(--gold-light), #8a6a25);
-  box-shadow: 0 0 14px rgba(230, 199, 122, 0.55);
-}
-.project-image {
-  padding: 12px;
-  background: #090605;
-  border: 1px solid var(--gold);
-  box-shadow: 0 0 0 5px var(--surface), 0 0 0 6px var(--gold-dim), 0 18px 34px rgba(0, 0, 0, 0.6);
-  transition: box-shadow 0.6s var(--ease);
-}
-.project-image::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(180deg, rgba(230, 199, 122, 0.2), rgba(230, 199, 122, 0.04) 38%, transparent 65%);
-  transition: opacity 0.6s var(--ease);
-}
-.project-image img { position: relative; }
-.project-image span {
-  z-index: 1;
-  background: var(--emerald);
-  color: var(--cream);
-  border: 1px solid var(--gold-dim);
-  font: 500 11px/1 var(--sans);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-.project small { font: 400 11px/1.4 var(--sans); letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-top: 22px; }
-.project h3 { font-family: var(--serif); font-weight: 400; color: var(--cream); transition: color 0.4s var(--ease); }
-.project:hover { transform: translateY(-6px); }
-.project:hover h3 { color: var(--gold-light); }
-.project:hover .project-image {
-  box-shadow: 0 0 0 5px var(--surface), 0 0 0 6px var(--gold), 0 22px 44px rgba(0, 0, 0, 0.65), 0 0 36px rgba(230, 199, 122, 0.3);
-}
-.project:hover .project-image::after { opacity: 1.6; }
-
-/* Artwork block */
-.vintage-art, .camera-art > img {
-  padding: 12px;
-  background: #090605;
-  border: 1px solid var(--gold);
-  box-shadow: 0 0 0 5px var(--surface), 0 0 0 6px var(--gold-dim), 0 22px 44px rgba(0, 0, 0, 0.6);
-}
-.camera-art > .night-logo { padding: 0; border-color: var(--gold-dim); box-shadow: 0 14px 30px rgba(0, 0, 0, 0.6); }
 
 /* Buttons */
 .primary {
@@ -347,7 +269,7 @@ select option { background: var(--surface); color: var(--cream); }
   to { opacity: 1; transform: none; }
 }
 @supports (animation-timeline: view()) {
-  .gallery .section-head, .project, .brand-artwork > *, .booking > * {
+  .gallery .section-head, .poster, .booking > * {
     animation: rise linear backwards;
     animation-timeline: view();
     animation-range: entry 0% entry 45%;
@@ -359,7 +281,6 @@ select option { background: var(--surface); color: var(--cream); }
   nav button.nav-book { padding: 10px 18px; }
   .booking { padding: 70px 18px 80px; }
   .booking .eyebrow { letter-spacing: 0.32em; padding-left: 0.32em; }
-  .project-image { padding: 9px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
