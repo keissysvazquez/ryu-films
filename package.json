@@ -10,6 +10,10 @@
     "dev": "node scripts/serve.mjs dist",
     "start": "node scripts/serve.mjs dist",
     "build": "node scripts/build.mjs",
-    "preview": "node scripts/serve.mjs build"
+    "preview": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.151.0"
   }
 }
