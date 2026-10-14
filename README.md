@@ -93,3 +93,8 @@ Credentials, Git history and machine-specific caches are intentionally excluded.
 ## Tests and deployment
 
 Run `npm test` before committing. Branching, environments (dev -> production) and CI/CD are described in [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Adding videos to Selected Work
+
+Edit `dist/videos.js` only. Each entry takes `title`, `category` (Music Videos, Brand Films or Aerial), `instagramUrl`, and optional `coverImage`, `year`, `featured: true` and `videoUrl`. Set `videoUrl` to a Vimeo link or an MP4/WebM URL to play it instead of the Instagram embed. Filter tabs with no videos are hidden automatically. Entries titled PLACEHOLDER are samples to replace.
+
