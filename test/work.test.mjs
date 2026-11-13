@@ -34,9 +34,9 @@ const $$ = (w, s) => [...w.document.querySelectorAll(s)];
 
 test("video list matches the requested Instagram links in order, with real covers", () => {
   const w = load();
-  const codes = ["C6msNW1Ol1A", "CYDXCoorQAi", "CXOVGRmvPZn", "CTXWu_Jn6Gn", "COgpL9Cj-B-", "CNamRogD2bU", "CLAnbxzjLvC", "CCUB4MHjQye", "B0LULHkjzhZ", "BXDWWq3Arag"];
+  const codes = ["C6msNW1Ol1A", "DfpwyUNuQkp", "CYDXCoorQAi", "CXOVGRmvPZn", "CTXWu_Jn6Gn", "COgpL9Cj-B-", "CNamRogD2bU", "CLAnbxzjLvC", "CCUB4MHjQye", "B0LULHkjzhZ", "BXDWWq3Arag"];
   const v = w.RYU_VIDEOS;
-  assert.equal(v.length, 10);
+  assert.equal(v.length, 11);
   v.forEach((e, i) => {
     assert.ok(e.title && e.category && e.artist);
     assert.ok(e.instagramUrl.includes(codes[i]), `link ${i + 1}`);
@@ -46,6 +46,18 @@ test("video list matches the requested Instagram links in order, with real cover
     const head = readFileSync(new URL(e.coverImage, dist)).subarray(0, 3);
     assert.ok(head.equals(Buffer.from([0xff, 0xd8, 0xff])) || head[0] === 0x89, `not an image: ${e.coverImage}`);
   });
+});
+test("updated cover and new barbershop reel appear and play in Brand Films", () => {
+  const w = load();
+  assert.equal(w.RYU_VIDEOS[0].coverImage, "assets/ig-C6msNW1Ol1A-cover.jpg");
+  $$(w, ".reel-tab").find((b) => b.textContent === "Brand Films").click();
+  const cards = $$(w, ".reel-card");
+  assert.equal(cards.length, 1);
+  assert.equal(cards[0].querySelector(".reel-cat").textContent, "Dímelo Barbershop");
+  assert.equal(cards[0].querySelector("img").getAttribute("src"), "assets/ig-DfpwyUNuQkp.jpg");
+  cards[0].click();
+  assert.equal($(w, "#reel-dialog iframe").src, "https://www.instagram.com/reel/DfpwyUNuQkp/embed");
+  assert.equal($(w, ".reel-link").href, "https://www.instagram.com/reel/DfpwyUNuQkp/");
 });
 test("index.html has Work nav link, section after gallery, and a lightbox with .close", () => {
   const w = load();
