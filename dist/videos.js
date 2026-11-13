@@ -20,8 +20,17 @@ window.RYU_VIDEOS = [
     artist: 'RYU Films',
     category: 'Behind the Scenes',
     instagramUrl: 'https://www.instagram.com/reel/C6msNW1Ol1A/',
-    coverImage: 'assets/ig-C6msNW1Ol1A.jpg',
-    coverPosition: '50% 78%',
+    coverImage: 'assets/ig-C6msNW1Ol1A-cover.jpg',
+    coverPosition: '50% 50%',
+    year: ''
+  },
+  {
+    title: 'First Anniversary',
+    artist: 'Dímelo Barbershop',
+    category: 'Brand Films',
+    instagramUrl: 'https://www.instagram.com/reel/DfpwyUNuQkp/',
+    coverImage: 'assets/ig-DfpwyUNuQkp.jpg',
+    coverPosition: '50% 42%',
     year: ''
   },
   {
