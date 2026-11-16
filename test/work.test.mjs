@@ -34,9 +34,9 @@ const $$ = (w, s) => [...w.document.querySelectorAll(s)];
 
 test("video list matches the requested Instagram links in order, with real covers", () => {
   const w = load();
-  const codes = ["C6msNW1Ol1A", "DfpwyUNuQkp", "CYDXCoorQAi", "CXOVGRmvPZn", "CTXWu_Jn6Gn", "COgpL9Cj-B-", "CNamRogD2bU", "CLAnbxzjLvC", "CCUB4MHjQye", "B0LULHkjzhZ", "BXDWWq3Arag"];
+  const codes = ["C6msNW1Ol1A", "DfpwyUNuQkp", "CYDXCoorQAi", "CXOVGRmvPZn", "CTXWu_Jn6Gn", "COgpL9Cj-B-", "CNamRogD2bU", "CLAnbxzjLvC", "CCUB4MHjQye", "B0LULHkjzhZ", "BXDWWq3Arag", "Df0HXgLqedn"];
   const v = w.RYU_VIDEOS;
-  assert.equal(v.length, 11);
+  assert.equal(v.length, 12);
   v.forEach((e, i) => {
     assert.ok(e.title && e.category && e.artist);
     assert.ok(e.instagramUrl.includes(codes[i]), `link ${i + 1}`);
@@ -46,6 +46,17 @@ test("video list matches the requested Instagram links in order, with real cover
     const head = readFileSync(new URL(e.coverImage, dist)).subarray(0, 3);
     assert.ok(head.equals(Buffer.from([0xff, 0xd8, 0xff])) || head[0] === 0x89, `not an image: ${e.coverImage}`);
   });
+});
+test("Pablo memorial reel appears in its category and opens the Instagram embed", () => {
+  const w = load();
+  $$(w, ".reel-tab").find((b) => b.textContent === "Memorial Films").click();
+  const cards = $$(w, ".reel-card");
+  assert.equal(cards.length, 1);
+  assert.equal(cards[0].querySelector(".reel-card-title").textContent, "For Pablo");
+  assert.equal(cards[0].querySelector(".reel-cat").textContent, "Pablo Francisco Polanco");
+  assert.equal(cards[0].querySelector("img").getAttribute("src"), "assets/ig-Df0HXgLqedn.jpg");
+  cards[0].click();
+  assert.equal($(w, "#reel-dialog iframe").src, "https://www.instagram.com/reel/Df0HXgLqedn/embed");
 });
 test("updated cover and new barbershop reel appear and play in Brand Films", () => {
   const w = load();
