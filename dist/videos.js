@@ -5,8 +5,8 @@
 // Fields
 //   title        (required) Shown under the card and in the player.
 //   artist       Artist or client name, shown in small gold capitals above the title.
-//   category     (required) "Music Videos", "Brand Films", "Behind the Scenes" or "Aerial". Filter tabs are built from
-//                the categories used here; a category with no videos gets no tab.
+//   category     (required) Filter tabs are built from the categories used here;
+//                a category with no videos gets no tab.
 //   instagramUrl Instagram post, reel or IGTV URL.
 //   coverImage   (optional) Path to a still. Cropped to fill a 16:9 frame. Leave '' for an
 //                elegant placeholder card.
@@ -106,6 +106,15 @@ window.RYU_VIDEOS = [
     category: 'Music Videos',
     instagramUrl: 'https://www.instagram.com/p/BXDWWq3Arag/',
     coverImage: 'assets/ig-BXDWWq3Arag.jpg',
+    year: ''
+  },
+  {
+    title: 'For Pablo',
+    artist: 'Pablo Francisco Polanco',
+    category: 'Memorial Films',
+    instagramUrl: 'https://www.instagram.com/reel/Df0HXgLqedn/',
+    coverImage: 'assets/ig-Df0HXgLqedn.jpg',
+    coverPosition: '50% 15%',
     year: ''
   }
 ];
